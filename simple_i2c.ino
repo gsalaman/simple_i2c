@@ -1,7 +1,7 @@
 
 #include <Wire.h>
 
-bool wait=false;
+bool wait=true;
 
 void wait_for_key( void )
 {
@@ -25,7 +25,7 @@ void setup()
 {
   Serial.println("Init");
   Serial.begin(9600);
-  Wire1.begin();
+  Wire.begin();
   
   debug_print_and_wait("init complete"); 
 }
@@ -33,19 +33,19 @@ void setup()
 void loop() 
 {
   debug_print_and_wait("begin transmission");
-  Wire1.beginTransmission(0x20);
+  Wire.beginTransmission(0x20);
   
   debug_print_and_wait("write address"); 
-  Wire1.write(0x03);
+  Wire.write(0x03);
   
   debug_print_and_wait("end transmission");
-  Wire1.endTransmission();
+  Wire.endTransmission();
   
   debug_print_and_wait("request 1 byte");
-  Wire1.requestFrom(0x20,1);
+  Wire.requestFrom(0x20,1);
   
   debug_print_and_wait("read");
-  if (Wire1.available()) Serial.println(Wire1.read());
+  if (Wire.available()) Serial.println(Wire.read());
   else Serial.println("Read fails");
 
   delay(1000);
