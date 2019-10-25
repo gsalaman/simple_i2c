@@ -96,3 +96,5 @@ Now lets look at the same thing on the 8266.  Here's the read request:
 
 Looks exactly like the artemis...except for clock speed.
 
+And now the interesting bit...here's the read response:
+
