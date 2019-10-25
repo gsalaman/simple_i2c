@@ -97,4 +97,9 @@ Now lets look at the same thing on the 8266.  Here's the read request:
 Looks exactly like the artemis...except for clock speed.
 
 And now the interesting bit...here's the read response:
+![8266_read_response](https://user-images.githubusercontent.com/43499190/67585126-31484980-f70c-11e9-99dd-1ce9e7859f9c.jpg)
+No byte transfer...just SDA going low and SCL going back high.
+
+Here's the transaction, zoomed out:
+
 
