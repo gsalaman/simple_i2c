@@ -81,9 +81,15 @@ Here's the "read" request from the artemis (master).
 Counting the bits again, we're seeing address 0x20 (010 0000), followed this time by a 1 (read request).
 
 After a little bit of time, the joystick will put it's data onto the bus:
+![working_read_response](https://user-images.githubusercontent.com/43499190/67584380-bc284480-f70a-11e9-8c03-a8fdf3f60159.jpg)
 
 
 Here's the whole thing, zoomed out (100us per division)
 ![working_read_100us](https://user-images.githubusercontent.com/43499190/67583889-bed66a00-f709-11e9-9621-81effc516960.jpg)
+The joystick starts by pulling down SDA, at which the Master starts generating clock pulses.  We get then a byte of data - 0111 1011 or 0x7b or 123.  We then have an ack bit (which I think is unused in this case?), followed by the stop condition...where SDA is pulled high once SCL is high.
 
 Note that it takes a little more than 400us for the joystick to actually write the byte onto the bus.
+
+## 8266 "read" analysis
+Now lets look at the same thing on the 8266.  Here's the read request:
+
