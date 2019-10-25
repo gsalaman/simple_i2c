@@ -29,12 +29,23 @@ So maybe it's Wire1 instead of Wire to get the 8266 working.  Nope...while the A
 8266 only has Wire...Wire1 doesn't even compile.  Okay, so there's something different between the I2C between the two.  Time
 to dig into the signals and drag out the scope.  Means I needed to refresh my I2C knowlege...
 
-## I2C specifis
+## I2C specifics
 Sparkfun has a good primer at
 https://learn.sparkfun.com/tutorials/i2c/all
 
 If you look at my simple code, you'll notice we've got two main "blocks"...this one tells which I2C device address and which register in that device we're interested in:
 ```
+  Wire1.beginTransmission(0x20);
+  Wire1.write(0x03);
+  Wire1.endTransmission();
+```
+Basically, I want to talk to the device at I2C address 0x20, and I'm interested in register 0x03 from that device.
+
+Note my actual code has some debug constructs around these...but this is really the core of what's needed.  Also, note this snippet is "Wire1" rather than "Wire"...meaning it's for Artemis, not 8266.
+
+Then, you need to request a read:
+```
+
 ```
 
 ## Artemis Signal analysis.
