@@ -76,6 +76,9 @@ We see the same bits being sent, and also see both acks.  Note the clock rate is
 
 ## Artemis "read" analysis
 Here's the "read" request from the artemis (master).
+![working_read_request](https://user-images.githubusercontent.com/43499190/67584171-445a1a00-f70a-11e9-8481-6e648d860158.jpg)
+ 
+Counting the bits again, we're seeing address 0x20 (010 0000), followed this time by a 1 (read request).
 
 After a little bit of time, the joystick will put it's data onto the bus:
 
@@ -84,4 +87,3 @@ Here's the whole thing, zoomed out (100us per division)
 ![working_read_100us](https://user-images.githubusercontent.com/43499190/67583889-bed66a00-f709-11e9-9621-81effc516960.jpg)
 
 Note that it takes a little more than 400us for the joystick to actually write the byte onto the bus.
-![working_read_100us](https://user-images.githubusercontent.com/43499190/67583889-bed66a00-f709-11e9-9621-81effc516960.jpg)
