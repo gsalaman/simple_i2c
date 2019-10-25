@@ -53,7 +53,7 @@ The "requestFrom" actually does the I2C bus write...it's requesting one byte fro
 
 The "Wire1.available" is a software call that checks that hardware transaction...it returns the number of bytes available.  In our example (and if everything is good), it'll return a "1"...but if the transaction has failed, it will return a "0", meaning no bytes are available.
 
-## Artemis Signal analysis.
+## Artemis "write" signal analysis.
 Now lets look at this in hardware.  Here's a snapshot of that first "setup" block:
 
 ![working write_25us](https://user-images.githubusercontent.com/43499190/67578581-f93b0980-f6ff-11e9-9224-e4eb8ceff015.jpg)
@@ -65,4 +65,8 @@ We then have another 0, meaning the master (8266) wants to write.  We then have 
 
 This Ack was important to check...it meant that the joystick was actually seeing and matching it's address (0x20).
 
-Next, the master writes the data it wants to write...in this case, it's the register of interest (0x03).  Those 8 bits follow.
+Next, the master writes the data it wants to write...in this case, it's the register of interest (0x03).  Those 8 bits follow, followed by another ack pulse (which the joystick also acks by pulling SDA low).  All good.
+
+## 8266 "write" analysis
+Now, let's look at the same thing on the 8266.
+
