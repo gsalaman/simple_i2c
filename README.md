@@ -60,3 +60,5 @@ Now lets look at this in hardware.  Here's a snapshot of that first "setup" bloc
 
 The top signal is SDA; the bottom SCL.
 
+Note the first seven bits (working your way left-to-right on SDA, matching each bit when SCL goes high): 010 0000, or 0x20.
+We then have another 0, meaning the master (8266) wants to read.  We then have an Ack pulse, where the slave pulls SDA low when SCL goes high.
