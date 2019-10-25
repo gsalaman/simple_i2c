@@ -109,7 +109,11 @@ So what's going on?  A master device needs a "timeout" for a given read where it
 
 First question:  why is it taking the joystick 400us to respond?  Answer:  because it's based on 2 analog joysticks...meaning we need time for the A/D converters to get a good value.
 
-Second question:  can we make the 8266 "wait" longer for it's response?  Answer:  yes!  There's a concept called clock stretching...if we make it 2000 us, that'll give us more than enough time for that 400us it takes the joystick to respond.
+Second question:  can we make the 8266 "wait" longer for it's response?  Answer:  yes!  There's a concept called clock stretching...if we make it 2000 us, that'll give us more than enough time for that 400us it takes the joystick to respond.  You can do that in the setup code with a call to setClockStretchLimit(), like this:
+```
+  Wire.begin();
+  Wire.setClockStretchLimit(2000);
+```
 
 Here's a pic of that working, on the 8266:
 ![8266_working_read](https://user-images.githubusercontent.com/43499190/67585888-aff1b680-f70d-11e9-9b00-461d5c4410dd.jpg)
