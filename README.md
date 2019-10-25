@@ -61,4 +61,8 @@ Now lets look at this in hardware.  Here's a snapshot of that first "setup" bloc
 The top signal is SDA; the bottom SCL.
 
 Note the first seven bits (working your way left-to-right on SDA, matching each bit when SCL goes high): 010 0000, or 0x20.
-We then have another 0, meaning the master (8266) wants to read.  We then have an Ack pulse, where the slave pulls SDA low when SCL goes high.
+We then have another 0, meaning the master (8266) wants to write.  We then have an Ack pulse, where the slave pulls SDA low when SCL goes high.
+
+This Ack was important to check...it meant that the joystick was actually seeing and matching it's address (0x20).
+
+Next, the master writes the data it wants to write...in this case, it's the register of interest (0x03).  Those 8 bits follow.
