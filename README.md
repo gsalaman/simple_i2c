@@ -29,7 +29,7 @@ So maybe it's Wire1 instead of Wire to get the 8266 working.  Nope...while the A
 8266 only has Wire...Wire1 doesn't even compile.  Okay, so there's something different between the I2C between the two.  Time
 to dig into the signals and drag out the scope.  Means I needed to refresh my I2C knowlege...
 
-## I2C specifics
+## I2C software side
 Sparkfun has a good primer at
 https://learn.sparkfun.com/tutorials/i2c/all
 
@@ -45,9 +45,15 @@ Note my actual code has some debug constructs around these...but this is really 
 
 Then, you need to request a read:
 ```
-
+  Wire1.requestFrom(0x20,1);
+  if (Wire1.available()) Serial.println(Wire1.read());
+  else Serial.println("Read fails");
 ```
+The "requestFrom" actually does the I2C bus write...it's requesting one byte from address 0x20.  That device knows the byte comes from it's 0x03 register...and if everything is working, that byte is returned to the I2C driver.  More on how that happens down below.  
+
+The "Wire1.available" is a software call that checks that hardware transaction...it returns the number of bytes available.  In our example (and if everything is good), it'll return a "1"...but if the transaction has failed, it will return a "0", meaning no bytes are available.
 
 ## Artemis Signal analysis.
-https://github.com/gsalaman/simple_i2c/issues/1#issuecomment-546373295
+Now lets look at this in hardware.  Here's a snapshot of that first "setup" block:
+
 
