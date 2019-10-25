@@ -26,6 +26,7 @@ void setup()
   Serial.println("Init");
   Serial.begin(9600);
   Wire.begin();
+  Wire.setClockStretchLimit(2000);
   
   debug_print_and_wait("init complete"); 
 }
