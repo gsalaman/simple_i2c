@@ -1,6 +1,6 @@
 # simple_i2c, or, test code for debugging I2C on the 8266 Thing
 ## Background
-While working on an MQTT joystick, I ran into a roadblock with the 8266's I2C.  The basic overview:  you've got an 8266 talking w
+While working on an MQTT joystick, I ran into a roadblock with the 8266's I2C.  The basic overview:  you've got an 8266 talking over
 Wifi to an MQTT server, and polling an I2C joystick to send direction changes to that server...which then forwards them on to
 whichever game is listening.  Worked through all the nasty Wifi and MQTT stuff (which I *thought* would be the hard part), 
 and then hooked up I2c...which was failing the reads of the joystick!
