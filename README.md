@@ -56,4 +56,7 @@ The "Wire1.available" is a software call that checks that hardware transaction..
 ## Artemis Signal analysis.
 Now lets look at this in hardware.  Here's a snapshot of that first "setup" block:
 
+![working write_25us](https://user-images.githubusercontent.com/43499190/67578581-f93b0980-f6ff-11e9-9224-e4eb8ceff015.jpg)
+
+The top signal is SDA; the bottom SCL.
 
