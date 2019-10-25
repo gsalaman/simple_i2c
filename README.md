@@ -92,4 +92,7 @@ Note that it takes a little more than 400us for the joystick to actually write t
 
 ## 8266 "read" analysis
 Now lets look at the same thing on the 8266.  Here's the read request:
+![8266_read_request](https://user-images.githubusercontent.com/43499190/67584957-e8909080-f70b-11e9-871a-aefcb40aa314.jpg)
+
+Looks exactly like the artemis...except for clock speed.
 
