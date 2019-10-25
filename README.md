@@ -112,5 +112,6 @@ First question:  why is it taking the joystick 400us to respond?  Answer:  becau
 Second question:  can we make the 8266 "wait" longer for it's response?  Answer:  yes!  There's a concept called clock stretching...if we make it 2000 us, that'll give us more than enough time for that 400us it takes the joystick to respond.
 
 Here's a pic of that working, on the 8266:
-
+![8266_working_read](https://user-images.githubusercontent.com/43499190/67585888-aff1b680-f70d-11e9-9b00-461d5c4410dd.jpg)
+Note the response is stil a little more than 400us away from the request.
 
