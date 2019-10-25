@@ -75,4 +75,13 @@ Now, let's look at the same thing on the 8266.
 We see the same bits being sent, and also see both acks.  Note the clock rate is a little different...in the Artemis picture, we're 25us per division...if we do the math, that looks like ~100 KHz.  In the 8266, we're at 50us per division, with a clock rate ~60 KHz.  Something to keep my eye on...
 
 ## Artemis "read" analysis
+Here's the "read" request from the artemis (master).
 
+After a little bit of time, the joystick will put it's data onto the bus:
+
+
+Here's the whole thing, zoomed out (100us per division)
+![working_read_100us](https://user-images.githubusercontent.com/43499190/67583889-bed66a00-f709-11e9-9621-81effc516960.jpg)
+
+Note that it takes a little more than 400us for the joystick to actually write the byte onto the bus.
+![working_read_100us](https://user-images.githubusercontent.com/43499190/67583889-bed66a00-f709-11e9-9621-81effc516960.jpg)
