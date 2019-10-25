@@ -70,3 +70,6 @@ Next, the master writes the data it wants to write...in this case, it's the regi
 ## 8266 "write" analysis
 Now, let's look at the same thing on the 8266.
 
+![8266_write_50us](https://user-images.githubusercontent.com/43499190/67580181-2210ce00-f703-11e9-8816-ac9dd84ef116.jpg)
+
+We see the same bits being sent, and also see both acks.  Note the clock rate is a little different...in the Artemis picture, we're 25us per division...if we do the math, that looks like ~100 KHz.  In the 8266, we're at 50us per division, with a clock rate ~
