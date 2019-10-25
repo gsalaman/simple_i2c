@@ -27,4 +27,8 @@ only talks Bluetooth...not Wifi.  :(
 ## Back to the 8266
 So maybe it's Wire1 instead of Wire to get the 8266 working.  Nope...while the Artemis has 2 different I2C addressing schemes, the 
 8266 only has Wire...Wire1 doesn't even compile.  Okay, so there's something different between the I2C between the two.  Time
-to dig into the signals and drag out the scope.
+to dig into the signals and drag out the scope.  Means I needed to refresh my I2C knowlege, and Sparkfun had a good primer at
+https://learn.sparkfun.com/tutorials/i2c/all
+
+## Artemis Signal analysis.
+
