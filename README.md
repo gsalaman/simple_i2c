@@ -7,8 +7,8 @@ and then hooked up I2c...which was failing the reads of the joystick!
 
 ## First Debug Step:  RPI
 The first thing I needed to check was whether the joystick was working.  Since I'm in arduino-land, my first thought was to 
-tweak the driver I was using on an Uno for an I2C touchpot and see if it would talk to the joystick...but the Uno ruins at 5v and
-the joystick I have is 3.3.  While I *could* translated the levels, I'd rather do this with a 3.3v system.
+tweak the driver I was using on an Uno for an I2C touchpot and see if it would talk to the joystick...but the Uno runs at 5v and
+the joystick I have is 3.3v.  While I *could* translate the levels, I'd rather do this with a 3.3v system.
 
 Next thought:  use the Pi.  It's 3.3v, and it's got decent command line tools for detecting addresses & doing reads and writes.
 So, hook that up, verify that it sees the device (default address 0x20), and I can do reads and writes of the horizontal and 
@@ -33,7 +33,7 @@ to dig into the signals and drag out the scope.  Means I needed to refresh my I2
 Sparkfun has a good primer at
 https://learn.sparkfun.com/tutorials/i2c/all
 
-If you look at my simple code, you'll notice we've got two main "blocks"...this one tells which I2C device address and which register in that device we're interested in:
+If you look at the code, you'll notice we've got two main "blocks"...this one tells which I2C device address and which register in that device we're interested in:
 ```
   Wire1.beginTransmission(0x20);
   Wire1.write(0x03);
@@ -105,11 +105,11 @@ Here's the transaction, zoomed out:
 
 Note that SDA is going low about ~230us after our request...with SCL going high shortly thereafter.  Much quicker than the 400us time in the "working" case.
 
-So what's going on?  A master device needs a "timeout" for a given read where it's gonna give up on the slave device.  Looking at the working artemis case, we see that it takes about 400 us for the joystick to respond.  In the 8266 case, the master is giving up and taking back control of the I2C bus.
+So what's going on?  A master device needs a "timeout" for a given read where it's gonna give up on the slave device.  Looking at the working artemis case, we see that it takes about 400 us for the joystick to respond.  In the 8266 case, the master is giving up and taking back control of the I2C bus at about 230us after asking for data...which is before the 400us that the joystick needs to respond.
 
-First question:  why is it taking the joystick 400us to respond?  Answer:  because it's based on 2 analog joysticks...meaning we need time for the A/D converters to get a good value.
+First question:  why is it taking the joystick 400us to respond?  Answer:  because it's based on 2 potentiometers connected to analog ports...meaning we need time for the A/D converters to get a good value.
 
-Second question:  can we make the 8266 "wait" longer for it's response?  Answer:  yes!  There's a concept called clock stretching...if we make it 2000 us, that'll give us more than enough time for that 400us it takes the joystick to respond.  You can do that in the setup code with a call to setClockStretchLimit(), like this:
+Second question:  can we make the 8266 "wait" longer for it's response?  Answer:  yes!  There's a concept called clock stretching...if we make the timeout 2000 us, that'll give us more than enough time for that 400us it takes the joystick to respond.  You can do that in the setup code with a call to setClockStretchLimit(), like this:
 ```
   Wire.begin();
   Wire.setClockStretchLimit(2000);
